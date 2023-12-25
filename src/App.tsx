@@ -13,12 +13,16 @@ const TodoList = () => {
     
 
     const handleOnChange = (event: React.FormEvent<HTMLInputElement>) => {
-      setNewTodo(event.currentTarget.value);
+      
+      setNewTodo(event.currentTarget.value.replace(/\d/g, ''));
+      
+
     }
 
     const handleAddTodo = () => { 
       const data = [...todos, {id:  Date.now().toString(), text: newTodo}];
       setTodos (data);
+      setNewTodo ("");
     
     };
 
@@ -41,6 +45,7 @@ const TodoList = () => {
                 ))}
             </List>
             <input
+                value={newTodo}
                 type="text"
                 placeholder="Добавить задачу"
                 onChange={handleOnChange}
